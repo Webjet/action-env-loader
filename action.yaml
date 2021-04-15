@@ -17,7 +17,7 @@ runs:
         do
           if [ -z "$line" ]; then
             echo $line >> $GITHUB_ENV
-          end
+          fi
         done
       shell: bash
 
