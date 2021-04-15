@@ -1,0 +1,37 @@
+name: 'Init environment variables'
+description: 'Init environment variables'
+
+inputs:
+  config:
+    description: 'plain/text base64'
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Check Hash
+      run: |
+        head_hash=$(git rev-parse HEAD)
+        current_hash=${GITHUB_SHA}
+        echo "HEAD hash=$head_hash"
+        echo "ACTION hash=$current_hash"
+        if [ $head_hash = $current_hash ]; then
+           echo "hash check ok!"
+        else
+           echo "Looks like miss commits, aborting .."
+           exit 1
+        fi    
+      shell: bash
+
+    - name: Init Envs
+      run: |
+        # custom variables
+        echo ${{ inputs.config }} | base64 --decode > tmp.cfg
+        cat tmp.cfg | while read line
+        do
+          if [ -z "$line" ]; then
+            echo $line >> $GITHUB_ENV
+          end
+        done
+      shell: bash
+
