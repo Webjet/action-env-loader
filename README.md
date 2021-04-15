@@ -13,9 +13,8 @@ Register global evironment from text file.
 Example config text
 
 ```text
-CONTAINERREGISTRY=bookchain.azurecr.io
-REPOSITORY=consortium
-KUBEBOT=kube.bot
+VAR1=value
+VAR2=value
 ```
 
 Example step

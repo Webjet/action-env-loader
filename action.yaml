@@ -16,6 +16,9 @@ runs:
         cat tmp.cfg | while read line
         do
           if [ ! -z "$line" ]; then
+            # mask value
+            VALUE=$(echo $line | cut -d2 -f2)
+            echo "::add-mask::$VALUE"
             echo "$line" >> $GITHUB_ENV
           fi
         done
