@@ -9,20 +9,6 @@ inputs:
 runs:
   using: "composite"
   steps: 
-    - name: Check Hash
-      run: |
-        head_hash=$(git rev-parse HEAD)
-        current_hash=${GITHUB_SHA}
-        echo "HEAD hash=$head_hash"
-        echo "ACTION hash=$current_hash"
-        if [ $head_hash = $current_hash ]; then
-           echo "hash check ok!"
-        else
-           echo "Looks like miss commits, aborting .."
-           exit 1
-        fi    
-      shell: bash
-
     - name: Init Envs
       run: |
         # custom variables
