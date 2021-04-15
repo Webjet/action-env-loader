@@ -16,7 +16,8 @@ runs:
         cat tmp.cfg | while read line
         do
           if [ -z "$line" ]; then
-            echo $line >> $GITHUB_ENV
+            echo "reading $line"
+            echo "$line" >> $GITHUB_ENV
           fi
         done
       shell: bash
