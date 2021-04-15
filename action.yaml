@@ -15,8 +15,7 @@ runs:
         echo ${{ inputs.config }} | base64 --decode > tmp.cfg
         cat tmp.cfg | while read line
         do
-          if [ -z "$line" ]; then
-            echo "reading $line"
+          if [ ! -z "$line" ]; then
             echo "$line" >> $GITHUB_ENV
           fi
         done
