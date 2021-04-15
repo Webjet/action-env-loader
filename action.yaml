@@ -17,7 +17,7 @@ runs:
         do
           if [ ! -z "$line" ]; then
             # mask value
-            VALUE=$(echo $line | cut -d2 -f2)
+            VALUE=$(echo $line | cut -d= -f2)
             echo "::add-mask::$VALUE"
             echo "$line" >> $GITHUB_ENV
           fi
