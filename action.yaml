@@ -16,10 +16,14 @@ runs:
         cat tmp.cfg | while read line
         do
           if [ ! -z "$line" ]; then
-            # mask value
-            VALUE=$(echo $line | cut -d= -f2)
-            echo "::add-mask::$VALUE"
-            echo "$line" >> $GITHUB_ENV
+              # mask value
+              VALUE=$(echo $line | cut -d= -f2)
+              if [[ $VALUE =~ ^::add-mask::* ]]; then
+                  echo "$VALUE"
+                  echo "$line" | sed s/::add-mask::// >> $GITHUB_ENV
+              else
+                  echo "$line" >> $GITHUB_ENV
+              fi
           fi
         done
       shell: bash

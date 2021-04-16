@@ -15,6 +15,7 @@ Example config text
 ```text
 VAR1=value
 VAR2=value
+PASSWORD=::add-mask::secret
 ```
 
 Example step
