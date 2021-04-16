@@ -10,7 +10,7 @@ Register global evironment from text file.
 
 ## Usage
 
-Example config text
+Create dummy filee.g `env.tmp` and add your environment variables in `key=value` format.
 
 ```text
 VAR1=value
@@ -18,7 +18,9 @@ VAR2=value
 PASSWORD=::add-mask::secret
 ```
 
-Example step
+Save and encode the content using `cat env.tmp | base64 -w 0` then encoded text and put it in your GitHub secrets.
+
+Example step, loading environment variables from `GLOBAL_ENV` secrets.
 
 ```bash
 - uses: webjet/action-env-loader@v1
@@ -26,3 +28,6 @@ Example step
     config: ${{ secrets.GLOBAL_ENV }}
 ```
 
+## Security Risk
+
+By default ENV will output to log. If you don't want to environment value output you can add `::add-mask::` in front of the value e.g. `PASSWORD=::add-mask::$up3rCr3t`
